@@ -27,7 +27,20 @@ class AuthController extends Controller
             $token = $user->createToken('auth_token')->plainTextToken;
             Log::info('User authenticated', ['user' => $user]);
 
-            return response()->json(['message' => 'Login successful', 'token' => $token], 200);
+            // Role-based redirection
+            $role = $user->role;
+            $roleMap = [
+                'admin' => 'admin',
+                'customer' => 'customer',
+                'courier' => 'courier'
+            ];
+
+            return response()->json([
+                'message' => 'Login successful',
+                'role' => $roleMap[$role] ?? 'unknown',
+                'token' => $token
+            ], 200);
+
         }
 
         Log::warning('Invalid login attempt', ['credentials' => $credentials]);
