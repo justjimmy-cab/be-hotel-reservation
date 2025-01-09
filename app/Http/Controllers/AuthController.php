@@ -22,9 +22,12 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+        Log::info('Login attempt', ['email' => $credentials['email']]);
+
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $token = $user->createToken('auth_token')->plainTextToken;
+            
             Log::info('User authenticated', ['user' => $user]);
 
             // Role-based redirection
