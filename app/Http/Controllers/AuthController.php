@@ -32,7 +32,6 @@ class AuthController extends Controller
             $roleMap = [
                 'admin' => 'admin',
                 'customer' => 'customer',
-                'courier' => 'courier'
             ];
 
             return response()->json([
