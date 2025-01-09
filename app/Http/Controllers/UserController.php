@@ -33,4 +33,15 @@ class UserController extends Controller
         return response()->json(['message' => 'User role updated successfully', 'user' => $user], 200);
     }
 
+    public function destroy($id) { 
+        $user = User::find($id); 
+
+        if (!$user) { 
+            return response()->json(['message' => 'User not found'], 404); 
+        } 
+        
+        $user->delete(); 
+        return response()->json(['message' => 'User deleted successfully'], 200); 
+    }
+
 }
