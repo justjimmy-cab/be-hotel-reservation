@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->group(function () {
             return \App\Models\User::paginate(10);
         });
         Route::put('/users/{id}/role', [UserController::class, 'updateRole']);
+        Route::delete('/users/{id}', [UserController::class, 'destroy']); 
     });
 
 });
