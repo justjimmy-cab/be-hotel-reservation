@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -18,7 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
             return \App\Models\User::paginate(10);
         });
         Route::put('/users/{id}/role', [UserController::class, 'updateRole']);
-        Route::delete('/users/{id}', [UserController::class, 'destroy']); 
+        Route::delete('/users/{id}', [UserController::class, 'destroy']);
     });
 
 });

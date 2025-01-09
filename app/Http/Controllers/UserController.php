@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -33,14 +34,20 @@ class UserController extends Controller
         return response()->json(['message' => 'User role updated successfully', 'user' => $user], 200);
     }
 
-    public function destroy($id) { 
+    public function destroy($id) 
+    { 
+        Log::info('Attempting to delete user', ['id' => $id]);
+        
         $user = User::find($id); 
-
+        
         if (!$user) { 
+            Log::warning('User not found', ['id' => $id]); 
             return response()->json(['message' => 'User not found'], 404); 
-        } 
+        }
         
         $user->delete(); 
+        Log::info('User deleted successfully', ['id' => $id]); 
+        
         return response()->json(['message' => 'User deleted successfully'], 200); 
     }
 
